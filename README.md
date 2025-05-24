@@ -1,24 +1,24 @@
-# README
+Ruby version : ruby 3.2.2
+Rails version : 8.0.2
+Data base : postgres
+############################################
+Models: There are two models: User and Ticket
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Relationship:
+A User has_many Tickets
+A Ticket belongs_to a User
+##############################################
+NotificationFactory Service
+A service named NotificationFactory is used to create notifier objects, such as email
 
-Things you may want to cover:
+In the future, if you want to add other notifiers like SMS, WhatsApp, etc., you only need to add them inside NotificationFactory without changing the client code
 
-* Ruby version
+This follows the Factory Design Pattern
+################################################
+Background Job
+A background job named ReminderJob runs every minute to check for users who need to be notified
 
-* System dependencies
+The main notification logic is implemented inside this job
 
-* Configuration
+Sidekiq and Redis are used to run this background job
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
