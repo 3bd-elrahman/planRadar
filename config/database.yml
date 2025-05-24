@@ -28,10 +28,10 @@ development:
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  username: <%= ENV['DATABASE_USER_NAME'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
 
   # The password associated with the PostgreSQL role (username).
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -57,8 +57,8 @@ development:
 test:
   <<: *default
   database: planradar_notification_assessment_test
-  username: <%= ENV['DATABASE_USER_NAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
   port: <%= ENV['DATABASE_PORT'] %>
 
