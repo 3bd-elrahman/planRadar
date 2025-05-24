@@ -1,6 +1,8 @@
 require_relative "boot"
 
 require "rails/all"
+require 'sidekiq-scheduler'
+require 'sidekiq-scheduler/web'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +25,12 @@ module PlanradarNotificationAssessment
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    Sidekiq.configure_server do |config|
+      config.on(:startup) do
+        Sidekiq.schedule = YAML.load_file(Rails.root.join("config/sidekiq.yml"))
+        Sidekiq::Scheduler.reload_schedule!
+      end
+    end
+
   end
 end
