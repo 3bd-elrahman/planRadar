@@ -5,7 +5,7 @@ Data base : postgres
 Models: There are two models: User and Ticket
 
 Relationship:
-A User has_many Tickets
+A User has_many Tickets ....
 A Ticket belongs_to a User
 ##############################################
 NotificationFactory Service
