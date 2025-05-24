@@ -2,7 +2,7 @@ class ReminderJob
   include Sidekiq::Worker
   sidekiq_options queue: :default
   def perform(*args)
-    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@ reminder job running @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    puts "################### reminder job running #####################################"
     tickets = Ticket.where("due_date >= ?", Date.today).includes(:user).all
     tickets.each do |ticket|
       user = ticket.user
@@ -16,7 +16,7 @@ class ReminderJob
 
       email = user.email
       notifier = 'email' # notifier type should save as a config in DB 
-      message = 'this is a reminder for due ticket'
+      message = "this is a reminder for due ticket with id #{ticket.id}"
       notifier_object = Notifications::NotificationFactory.build(notifier)
       notifier_object.send(user,message)
     end
